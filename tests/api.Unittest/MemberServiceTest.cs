@@ -26,7 +26,8 @@ namespace api.Unittest
                 LastName = "Muenkham",
             };
 
-            MemberService memberService = new MemberService();
+			StubMemberContext memberContext = new StubMemberContext();
+			MemberService memberService = new MemberService(memberContext);
             Member actualMember = memberService.GetMemberInfo(umayplusCardID, personalCardId, birthDate, mobilePhone);
 
             Assert.Equal(expectMember.UmayplusCardID, actualMember.UmayplusCardID);

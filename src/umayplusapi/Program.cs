@@ -19,7 +19,8 @@ namespace umayplusapi
 
         public static IWebHost BuildWebHost(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
-                .UseStartup<Startup>()
+				.UseUrls("http://*:5001")
+				.UseStartup<Startup>()
                 .Build();
     }
 }

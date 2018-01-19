@@ -1,15 +1,20 @@
 using System;
-
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace umayplusapi.Models
 {
-    public class Member
+	[Table("Member")]
+	public class Member
     {
         public int id { get; set; }
 
-        public string UmayplusCardID { get; set; }
+		[Column("umayplusCardID")]
 
-        public string PersonalCardID { get; set; }
+		public string UmayplusCardID { get; set; }
+
+		[Column("personalCardID")]
+
+		public string PersonalCardID { get; set; }
 
         public string BirthDate { get; set; }
 

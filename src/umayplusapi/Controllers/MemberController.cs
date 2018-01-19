@@ -3,43 +3,31 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-
+using umayplusapi.Models;
+using umayplusapi.Services;
 
 namespace umayplusapi.Controllers
 {
     [Route("api/[controller]")]
     public class MemberController : Controller
     {
-        // GET: api/<controller>
-        [HttpGet]
-        public IEnumerable<string> Get()
-        {
-            return new string[] { "value1", "value2" };
-        }
-
-        // GET api/<controller>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
-        {
-            return "value";
-        }
+		private IMemberService memberService;
+		public MemberController(IMemberService memberService) {
+			this.memberService = memberService;
+		}
 
         // POST api/<controller>
         [HttpPost]
-        public void Post([FromBody]string value)
+        public ResponseMessage Post([FromBody]Member member)
         {
-        }
+			//MemberService memberService = new MemberService();
+			Member returnMember = memberService.GetMemberInfo(member.UmayplusCardID, member.PersonalCardID, member.BirthDate, member.MobilePhone);
 
-        // PUT api/<controller>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody]string value)
-        {
-        }
-
-        // DELETE api/<controller>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
+			return new ResponseMessage() {
+				Status = "200",
+				Message = "NULL",
+				data = returnMember
+			};
         }
     }
 }
